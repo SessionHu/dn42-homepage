@@ -1,6 +1,8 @@
 #!/bin/sh
 set -x
-LIQ="`dirname $0`/radio.liq"
+WD=`dirname $0`
+LIQ="$WD/radio.liq"
+. $WD/../.rc
 while true; do
   liquidsoap $LIQ
 done

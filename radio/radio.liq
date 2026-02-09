@@ -2,7 +2,7 @@
 
 settings.log.level := 3
 
-music_dir = "/home/sess/Music"
+music_dir = environment.get("MUSIC_DIR")
 
 def fix_metadata(meta) =
   if meta["title"] == "" and meta["filename"] != "" then
