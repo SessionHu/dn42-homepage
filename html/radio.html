@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="/styles/index.css" />
   </head>
   <body>
-    <h1>SESS.DN42 Freedom Music Radio</h1>
+    <h1><a href="/">SESS.DN42</a> Freedom Music Radio</h1>
     <h2><a href="/cgi-bin/radio-playlist">Playlist (unordered)</a></h2>
-    <iframe id="radio-playlist-iframe" src="/cgi-bin/radio-playlist"></iframe>
+    <iframe id="radio-playlist-iframe" src="/cgi-bin/radio-playlist" onload="this.contentWindow.onclick=function(){this.location.reload();};"></iframe>
     <h2><a href="/status.xsl">Server Status</a></h2>
     <iframe id="radio-status-iframe" src="/status.xsl"></iframe>
+    <p><em>Copyright (c) 2026 SESS.DN42. CC-BY-NC-SA-4.0.</em></p>
   </body>
 </html>
