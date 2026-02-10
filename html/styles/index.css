@@ -1,0 +1,23 @@
+@charset 'utf-8';
+
+html {
+  color-scheme: light dark;
+}
+
+body {
+  width: 35em;
+  margin: 0 auto;
+  font-family: Tahoma, Verdana, Arial, sans-serif;
+}
+
+iframe {
+  width: 100%;
+}
+
+#radio-playlist-iframe {
+  height: 20vh;
+}
+
+#radio-status-iframe {
+  height: 60vh;
+}
