@@ -5,7 +5,8 @@ html {
 }
 
 body {
-  width: 35em;
+  width: 50em;
+  max-width: 90vw;
   margin: 0 auto;
   font-family: Tahoma, Verdana, Arial, sans-serif;
 }
@@ -20,4 +21,10 @@ iframe {
 
 #radio-status-iframe {
   height: 60vh;
+}
+
+.dns-table th,
+.dns-table td {
+	border: #111 1px dotted;
+  padding: 2px;
 }

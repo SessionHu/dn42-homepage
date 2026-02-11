@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="canonical" href="https://sess.dn42/dns.html" />
+    <title>SESS.DN42 DNS Services</title>
+    <link rel="icon" type="image/png" href="https://em-content.zobj.net/source/google/387/fish-cake-with-swirl_1f365.png" />
+    <link rel="stylesheet" href="/styles/index.css" />
+  </head>
+  <body>
+    <h1><a href="/">SESS.DN42</a> DNS Services</h1>
+    <p>
+      All our servers use BIND9 and DNSSEC verification is enabled.
+      You may trust our result to some extent (assuming no MITM).
+      But I still recommend that you verify the result by yourself.
+      <i>We do not support anycast yet. 'Cause it is unnecessary. (x</i>
+    </p>
+    <h2>Authoritative Name Servers</h2>
+    <h3>Servers</h3>
+    <p>All the authoritative name servers will reject recursive queries from non-Network-of-Sess IPs.</p>
+    <table class="dns-table">
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Protocol</th>
+        <th>Role</th>
+      </tr>
+      <tr>
+        <td><code>ns1.sess.dn42.</code></td>
+        <td><code>172.20.62.161</code> / <code>fd42:23eb:6cf::161</code></td>
+        <td>UDP / TCP</td>
+        <td>master</td>
+      </tr>
+      <tr>
+        <td><code>ns2.sess.dn42.</code></td>
+        <td><code>172.20.62.162</code> / <code>fd42:23eb:6cf::162</code></td>
+        <td>UDP / TCP</td>
+        <td>slave</td>
+      </tr>
+    </table>
+    <h3>Zones</h3>
+    <table class="dns-table">
+      <tr>
+        <th>Zone</th>
+        <th>Role</th>
+      </tr>
+      <tr>
+        <td><code>sess.dn42.</code></td>
+        <td>sess.dn42. forward zone</td>
+      </tr>
+      <tr>
+        <td><code>160/27.62.20.161.in-addr.arpa.</code></td>
+        <td>Network of Sess IPv4 reverse zone</td>
+      </tr>
+      <tr>
+        <td><code>f.c.6.0.b.e.3.2.2.4.d.f.ip6.arpa.</code></td>
+        <td>Network of Sess IPv6 reverse zone</td>
+      </tr>
+    </table>
+    <h2>Recursive Name Servers</h2>
+    <h3>Servers</h3>
+    <p>
+      This server is accessible via both clearnet and dn42 from all IPs,
+      and will return results for any dn42 and clearnet domain names that can be resolved.
+    </p>
+    <p>
+      You need to contact us to get the clearnet IP address and/or domain name for security concerns.
+      Please note that our resources are not unlimited, and we reserve the right to ban your IP address if the service is abused.
+    </p>
+    <p>
+      Additionally, please note that TLS and HTTPS certificates are issued by Let's Encrypt for the subject xhustudio.eu.org and subjectAltName *.xhustudio.eu.org. So do not be surprised if you encounter a certificate warning when using TLS or HTTPS via dn42.
+    </p>
+    <table class="dns-table">
+      <tr>
+        <th>Name</th>
+        <th>IP</th>
+        <th>Protocol</th>
+        <th>Role</th>
+      </tr>
+      <tr>
+        <td><code>dns.sess.dn42.</code></td>
+        <td><code>172.20.62.164</code> / <code>fd42:23eb:6cf::164</code></td>
+        <td>UDP / TCP / TLS / HTTPS</td>
+        <td>forward</td>
+      </tr>
+    </table>
+    <p><em>Copyright (c) 2026 SESS.DN42. CC-BY-NC-SA-4.0.</em></p>
+  </body>
+</html>
