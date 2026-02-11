@@ -16,10 +16,12 @@ iframe {
 }
 
 #radio-playlist-iframe {
+  min-height: 200px;
   height: 20vh;
 }
 
 #radio-status-iframe {
+  min-height: 600px;
   height: 60vh;
 }
 

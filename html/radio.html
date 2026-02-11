@@ -11,6 +11,19 @@
   <body>
     <h1><a href="/">SESS.DN42</a> Freedom Music Radio</h1>
     <h2><a href="/cgi-bin/radio-playlist">Playlist (unordered)</a></h2>
+    <p>
+      If you have some good musics but they are not in the playlist.
+      Please feel free to contact us, sending us your music files and short description.
+      We will add to the playlist if I also like them.
+    </p>
+    <p>
+      We prefer 48kHz 192kb/s Ogg Vorbis with metadata (our current output configuration),
+      but FLAC, M4A, MP3 and other open/free format are also accepted.
+      You have better use FFmpeg (or other free/libre media tools, e.g. Gstreamer)
+      to convert your file to our recommended configuration if it is too big (greater than 50MiB),
+      since our server storage is not infinity.
+      Please note that we do not accept any non-free encrypted music file format.
+    </p>
     <iframe id="radio-playlist-iframe" src="/cgi-bin/radio-playlist" onload="this.contentWindow.onclick=function(){this.location.reload();};"></iframe>
     <h2><a href="/status.xsl">Server Status</a></h2>
     <iframe id="radio-status-iframe" src="/status.xsl"></iframe>
