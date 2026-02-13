@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="canonical" href="https://sess.dn42/ntp.html" />
+    <title>SESS.DN42 Anycast NTP Service</title>
+    <link rel="icon" type="image/png" href="https://em-content.zobj.net/source/google/387/fish-cake-with-swirl_1f365.png" />
+    <link rel="stylesheet" href="/styles/index.css" />
+  </head>
+  <body>
+    <header><h1><a href="/">SESS.DN42</a> Anycast NTP Service</h1></header>
+    <main>
+      <p>
+        Our servers use Chrony to synchronize time from
+        <code>*.debian.pool.ntp.org</code> and other clearnet NTP servers.
+        They also provide NTP services on dn42. We use anycast to ensure the
+        lowest possible latency.
+      </p>
+      <table class="dot-table">
+        <tr>
+          <th>Name</th>
+          <th>IP</th>
+          <th>Note</th>
+        </tr>
+        <tr>
+          <td><code>ntp.sess.dn42.</code></td>
+          <td><code>fd42:23eb:6cf:aaaa::123</code></td>
+          <td>Anycast, IPv6 only</td>
+        </tr>
+      </table>
+    </main>
+    <footer><p><em>Copyright (c) 2026 SESS.DN42. CC-BY-NC-SA-4.0.</em></p></footer>
+  </body>
+</html>

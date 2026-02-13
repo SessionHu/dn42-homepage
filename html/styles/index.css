@@ -25,8 +25,8 @@ iframe {
   height: 60vh;
 }
 
-.dns-table th,
-.dns-table td {
+.dot-table th,
+.dot-table td {
 	border: #111 1px dotted;
   padding: 2px;
 }
