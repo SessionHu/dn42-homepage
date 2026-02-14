@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="canonical" href="https://sess.dn42/network.html" />
+    <title>SESS.DN42 Network Address Assignments</title>
+    <link rel="icon" type="image/png" href="https://em-content.zobj.net/source/google/387/fish-cake-with-swirl_1f365.png" />
+    <link rel="stylesheet" href="/styles/index.css" />
+  </head>
+  <body>
+    <header><h1><a href="/">SESS.DN42</a> Network Address Assignments</h1></header>
+    <main>
+      <section>
+        <h2><code>172.20.62.160/27</code> Network of Sess</h2>
+        <ul>
+          <li><code>172.20.62.160</code> Reserved</li>
+          <li><code>172.20.62.161</code> Antarctica Gateway</li>
+          <li><code>172.20.62.162</code> NE HomeIDC</li>
+          <li><code>172.20.62.163</code> MMP Proto</li>
+          <li><code>172.20.62.164</code> NE E2 Google</li>
+          <li><code>172.20.62.165 - 172.20.62.183</code> Unassigned</li>
+          <li><code>172.20.62.184 - 172.20.62.191</code> MMP Proto VM Network</li>
+        </ul>
+        <section>
+          <h3><code>172.20.62.184/29</code> MMP Proto VM Network</h3>
+          <ul>
+            <li><code>172.20.62.165</code> MMP Proto VM dn42 Bridge</li>
+            <li><code>172.20.62.166</code> MMP Proto VM GNU Guix</li>
+            <li><code>172.20.62.167 - 172.20.62.190</code> Unassigned</li>
+            <li><code>172.20.62.191</code> Reserved</li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <h2><code>fd42:23eb:6cf::/24</code> Network of Sess</h2>
+        <ul>
+          <li><code>fd42:23eb:6cf::</code> Reserved</li>
+          <li><code>fd42:23eb:6cf::1 - fd42:23eb:6cf::160</code> Unassigned</li>
+          <li><code>fd42:23eb:6cf::161</code> Antarctica Gateway</li>
+          <li><code>fd42:23eb:6cf::162</code> NE HomeIDC</li>
+          <li><code>fd42:23eb:6cf::163</code> MMP Proto</li>
+          <li><code>fd42:23eb:6cf::164</code> NE E2 Google</li>
+          <li><code>fd42:23eb:6cf::165 - fd42:23eb:6cf:1110:ffff:ffff:ffff:ffff</code> Unassigned</li>
+          <li><code>fd42:23eb:6cf:1111:: - fd42:23eb:6cf:1111:ffff:ffff:ffff:ffff</code> Sess VM Network</li>
+          <li><code>fd42:23eb:6cf:1112:: - fd42:23eb:6cf:aaa0:ffff:ffff:ffff:ffff</code> Unassigned</li>
+          <li><code>fd42:23eb:6cf:aaaa:: - fd42:23eb:6cf:aaaa:ffff:ffff:ffff:ffff</code> Sess Anycast Network</li>
+          <li><code>fd42:23eb:6cf:aaab:: - fd42:23eb:6cf:ffff:ffff:ffff:ffff:fffe</code> Unassigned</li>
+          <li><code>fd42:23eb:6cf:ffff:ffff:ffff:ffff:ffff</code> Reserved</li>
+        </ul>
+        <section>
+          <h3><code>fd42:23eb:6cf:1111::/64</code> Sess VM Network</h3>
+          <ul>
+            <li><code>fd42:23eb:6cf:1111::</code> Reserved</li>
+            <li><code>fd42:23eb:6cf:1111::1 - fd42:23eb:6cf:1111:162:ffff:ffff:ffff</code> Unassigned</li>
+            <li><code>fd42:23eb:6cf:1111:163:: - fd42:23eb:6cf:1111:163:ffff:ffff:ffff</code> MMP Proto VM Network</li>
+            <li><code>fd42:23eb:6cf:1111:164:: - fd42:23eb:6cf:1111:ffff:ffff:ffff:fffe</code> Unassigned</li>
+            <li><code>fd42:23eb:6cf:1111:ffff:ffff:ffff:ffff</code> Reserved</li>
+          </ul>
+          <section>
+            <h4><code>fd42:23eb:6cf:1111:163::/80</code> MMP Proto VM Network</h4>
+            <ul>
+              <li><code>fd42:23eb:6cf:1111:163::</code> Reserved</li>
+              <li><code>fd42:23eb:6cf:1111:163::1</code> MMP Proto VM dn42 Bridge</li>
+              <li><code>fd42:23eb:6cf:1111:163::2</code> MMP Proto VM GNU Guix</li>
+              <li><code>fd42:23eb:6cf:1111:163::3 - fd42:23eb:6cf:1111:163:ffff:ffff:fffe</code> Unassigned</li>
+              <li><code>fd42:23eb:6cf:1111:163:ffff:ffff:ffff</code> Reserved</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <h3><code>fd42:23eb:6cf:aaaa::/64</code> Sess Anycast Network</h3>
+          <ul>
+            <li><code>fd42:23eb:6cf:aaaa::</code> Reserved</li>
+            <li><code>fd42:23eb:6cf:aaaa::1 - fd42:23eb:6cf:aaaa::122</code> Unassigned</li>
+            <li><code>fd42:23eb:6cf:aaaa::123</code> NTP Service</li>
+            <li><code>fd42:23eb:6cf:aaaa::124 - fd42:23eb:6cf:aaaa:ffff:ffff:ffff:fffe</code> Unassigned</li>
+            <li><code>fd42:23eb:6cf:aaaa:ffff:ffff:ffff:ffff</code> Reserved</li>
+          </ul>
+        </section>
+      </section>
+    </main>
+    <footer><p><em>Copyright (c) 2026 SESS.DN42. CC-BY-NC-SA-4.0.</em></p></footer>
+  </body>
+</html>
