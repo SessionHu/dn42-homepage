@@ -1,5 +1,3 @@
-%include "secret.liq"
-
 settings.log.level := 3
 
 music_dir = environment.get("MUSIC_DIR")
@@ -13,27 +11,22 @@ def fix_metadata(meta) =
   end
 end
 
-# defined in secret.liq
-# icecast_host =
-# icecast_port =
-# icecast_password =
-# icecast_mount =
-
 pl = playlist(music_dir, reload_mode="rounds", reload=1)
 
 radio_source = mksafe(metadata.map(fix_metadata, pl))
 
 output.icecast(
-  %vorbis(
-    channels=2,
+  %ogg(%opus(
     samplerate=48000,
-    quality=.6
-  ),
-  host=icecast_host,
-  port=icecast_port,
-  password=icecast_password,
-  mount=icecast_mount,
+    channels=2,
+    bitrate=320
+  )),
+  host=environment.get("ICECAST_HOST"),
+  port=int_of_string(environment.get("ICECAST_PORT")),
+  password=environment.get("ICECAST_PASSWORD"),
+  mount=environment.get("ICECAST_MOUNT"),
   name="SESS.DN42 Freedom Music Radio",
   description="I'm cute, please give me money~",
+  fallible=true,
   radio_source
 )
