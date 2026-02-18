@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="canonical" href="https://sess.dn42/blacklist.html" />
+    <title>SESS.DN42 Blacklist</title>
+    <link rel="icon" type="image/png" href="https://em-content.zobj.net/source/google/387/fish-cake-with-swirl_1f365.png" />
+    <link rel="stylesheet" href="/styles/index.css" />
+  </head>
+  <body>
+    <header><h1><a href="/">SESS.DN42</a> Blacklist</h1></header>
+    <main>
+      <section>
+        <h2>ASN</h2>
+        <p>
+          If you are in this table, that means we reject all routes where your
+          ASN in BGP path. You must resolve the reason of the problem and
+          contact us. We will unblock if your problem no longer existed.
+        </p>
+        <table class="dot-table">
+          <thead>
+            <tr>
+              <th>ASN</th>
+              <th>Nodes</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>4242422034</td>
+              <td>All</td>
+              <td>IPv6 hold raised route loop</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <h2>Peer</h2>
+        <p>
+          If you are in this table, that means we disable your BGP peer. You
+          must resolve the reason of the problem and contact us. We will
+          unblock if your problem no longer existed.
+        </p>
+        <table class="dot-table">
+          <thead>
+            <tr>
+              <th>ASN</th>
+              <th>Nodes</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>4242423999</td>
+              <td>Antarctica Gateway</td>
+              <td>
+                Indirectly reachable route next hop (ULA) raised 1000+ error
+                log line per minute
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+    <footer><p><em>Copyright (c) 2026 SESS.DN42. CC-BY-NC-SA-4.0.</em></p></footer>
+  </body>
+</html>
