@@ -31,19 +31,16 @@
               <th>Name</th>
               <th>IP</th>
               <th>Protocol</th>
-              <th>Role</th>
             </tr>
             <tr>
-              <td><code>ns1.sess.dn42.</code> / <code>c.root.mtf.dn42.</code></td>
+              <td><code>ns1.sess.dn42.</code> / <code>ns1.aka.dn42.</code> / <code>c.root.mtf.dn42.</code></td>
               <td><code>172.20.62.161</code> / <code>fd42:23eb:6cf::161</code></td>
               <td>UDP / TCP</td>
-              <td>master</td>
             </tr>
             <tr>
               <td><code>ns2.sess.dn42.</code></td>
               <td><code>172.20.62.162</code> / <code>fd42:23eb:6cf::162</code></td>
               <td>UDP / TCP</td>
-              <td>slave</td>
             </tr>
           </table>
         </section>
@@ -57,6 +54,10 @@
             <tr>
               <td><code>sess.dn42.</code></td>
               <td>sess.dn42. forward zone</td>
+            </tr>
+            <tr>
+              <td><code>aka.dn42.</code></td>
+              <td>aka.dn42. forward zone</td>
             </tr>
             <tr>
               <td><code>160/27.62.20.161.in-addr.arpa.</code></td>
@@ -100,13 +101,11 @@
               <th>Name</th>
               <th>IP</th>
               <th>Protocol</th>
-              <th>Role</th>
             </tr>
             <tr>
               <td><code>dns.sess.dn42.</code></td>
               <td><code>172.20.62.164</code> / <code>fd42:23eb:6cf::164</code></td>
               <td>UDP / TCP / TLS / HTTPS</td>
-              <td>forward</td>
             </tr>
           </table>
         </section>
