@@ -12,7 +12,7 @@
   <body>
     <header><h1><a href="/">SESS.DN42</a> Peering Information</h1></header>
     <main>
-      <p><code>AS4242422466</code> is open for peering.</p>
+      <p>SessNetwork (<code>AS4242422466</code>) is open for peering.</p>
       <section>
         <h2>Requirements</h2>
         <ul>
@@ -20,6 +20,7 @@
           <li>Not in the <a href="/blacklist.html">blacklist</a></li>
           <li>ROA/RPKI Validation</li>
           <li>RTT &lt; 100ms</li>
+          <li>Allow <code>172.16.0.0/12, 172.31.0.0/16, 10.0.0.0/8, fd00::/8, fe80::/64</code></li>
         </ul>
       </section>
       <section>
@@ -123,7 +124,7 @@
               </tr>
               <tr>
                 <td>Description</td>
-                <td>Mobile device with unstable uptime and network connection</td>
+                <td>Mobile device with unstable uptime and network connection. BFD is recommended.</td>
               </tr>
               <tr>
                 <td>IANA IPv4 / IPv6</td>
@@ -151,7 +152,7 @@
               </tr>
               <tr>
                 <td>Comment</td>
-                <td><s>Also support WireGuard in wstunnel,</s> n2n in <a href="https://ix.dn42.serinanya.cn/">SerinaIX</a></td>
+                <td>Also support <s>WireGuard in wstunnel,</s> n2n in <a href="https://ix.dn42.serinanya.cn/">SerinaIX</a>, AmneziaWG</td>
               </tr>
             </tbody>
           </table>
