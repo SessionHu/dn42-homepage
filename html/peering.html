@@ -202,17 +202,19 @@
           </table>
         </section>
         <section>
-          <h2>BGP Communities</h2>
+          <h2>Routing Policy</h2>
           <p>
             Prefixes originating from AS4242422466 will carry the
             <code>(64511, REGION)</code> and <code>(64511, COUNTRY)</code>
-            defined in dn42 wiki. We also use <code>bgp_local_pref</code>, +80
-            for same region, +30 for same country.
+            defined in dn42 wiki. Community values related to RTT, bandwidth
+            and security will be available in the future.
           </p>
           <p>
-            Community values related to RTT, bandwidth and security will be
-            available in the future (in other words, not implemented yet).
+            We use <code>bgp_local_pref</code>. Initial value is 100, +80 for
+            same region, +30 for same country, +120 for AS path &lt; 2, -90 for
+            ROA Unknown, -5 for IX. Value for iBGP is always 100.
           </p>
+          <p>See also <a href="/blacklist.html">blacklist</a>.</p>
         </section>
         <section>
           <h2>Contact</h2>
