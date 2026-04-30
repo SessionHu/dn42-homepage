@@ -69,7 +69,7 @@
             </tbody>
           </table>
         </section>
-        <section>
+        <!--<section>
           <h3><s>&#x1f3e0; NE HomeIDC (Somewhere, Mainland, PRC &#x1f1e8;&#x1f1f3;)</s></h3>
           <p><s>Not available currently. Please refer to MMP Proto.</s></p>
           <table class="dot-table">
@@ -156,7 +156,7 @@
               </tr>
             </tbody>
           </table>
-        </section>
+        </section>-->
         <section>
           <h3>&#x1f308; NE E2 Google (The Dalles, Oregon, US &#x1f1fa;&#x1f1f8;)</h3>
           <p>Recommended for peerings in <b>Seattle</b>, <b>Los Angeles</b>, <b>Western North America</b>.</p>
@@ -202,30 +202,74 @@
           </table>
         </section>
         <section>
-          <h2>Routing Policy</h2>
-          <p>
-            Prefixes originating from AS4242422466 will carry the
-            <code>(64511, REGION)</code> and <code>(64511, COUNTRY)</code>
-            defined in dn42 wiki. Community values related to RTT, bandwidth
-            and security will be available in the future.
-          </p>
-          <p>
-            We use <code>bgp_local_pref</code>. Initial value is 100, +80 for
-            same region, +30 for same country, +120 for AS path &lt; 2, -90 for
-            ROA Unknown, -5 for IX. Value for iBGP is always 100.
-          </p>
-          <p>See also <a href="/blacklist.html">blacklist</a>.</p>
+          <h3>&#x1f535; Mazarino (Kwai Chungi, Hong Kong SAR, PRC &#x1f1ed;&#x1f1f0;&#x1f1e8;&#x1f1f3;)</h3>
+          <p>Recommended for peerings in <b>Hong Kong</b>, <b>Singapore</b>, <b>Eastern Asia</b>.</p>
+          <table class="dot-table">
+            <tbody>
+              <tr>
+                <td>IANA ISP</td>
+                <td>AS213605 Pysio Research Network</td>
+              </tr>
+              <tr>
+                <td>Description</td>
+                <td>Donated by Pysio</td>
+              </tr>
+              <tr>
+                <td>IANA IPv4 / IPv6</td>
+                <td>✅ IPv4 / ✅ IPv6</td>
+              </tr>
+              <tr>
+                <td>DN42 IPv4 / IPv6</td>
+                <td><code>172.20.62.166</code> / <code>fd42:23eb:6cf::166</code></td>
+              </tr>
+              <tr>
+                <td>IPv6 Link-Local Address</td>
+                <td><code>fe80::2466/64</code></td>
+              </tr>
+              <tr>
+                <td>WireGuard Public Key</td>
+                <td><code>25F5Kt0fg7bTien58apDN2dLUyCN2DSe7W+Nvw7eCT4=</code></td>
+              </tr>
+              <tr>
+                <td>WireGuard Endpoint</td>
+                <td><code>mazarino-s-end.xhustudio.eu.org:?????</code></td>
+              </tr>
+              <tr>
+                <td>WireGuard Max MTU</td>
+                <td><b><code>1332</code></b></td>
+              </tr>
+              <tr>
+                <td>Comment</td>
+                <td>Also support n2n/n3n in <a href="https://ix.nedifinita.com/">NedifinitaIX</a></td>
+              </tr>
+            </tbody>
+          </table>
         </section>
-        <section>
-          <h2>Contact</h2>
-          <p>You should provide target node, your ASN, WireGuard Endpoint and Public Key, IPv6 Link-Local Address, and other essential information. Wireguard Endpoint may be optional if you are behind NAT but the target node not. I will reply as soon as possible. You can assume my endpoint port is last 5 digits of your ASN. If you want to use other peering method, please tell me.</p>
-          <ul>
-            <li>Email: <code>sess AT sess.dn42</code> || <code>sessionhu AT outlook.com</code></li>
-            <li>Bilibili: <a href="https://space.bilibili.com/645769214">Session小胡</a></li>
-            <li>Matrix: <a href="https://matrix.to/#/@sessx6cf:matrix.org">@sessx6cf:matrix.org</a></li>
-            <li>More at my blog, but not recommended</li>
-          </ul>
-        </section>
+      </section>
+      <section>
+        <h2>Routing Policy</h2>
+        <p>
+          Prefixes originating from AS4242422466 will carry the
+          <code>(64511, REGION)</code>, <code>(64511, COUNTRY)</code>,
+          <code>(64511, RTT)</code> and <code>(64511, LINK_SECURITY)</code>
+          defined in dn42 wiki.
+        </p>
+        <p>
+          We use <code>bgp_local_pref</code> and <code>bgp_large_community</code>.
+          Really complex to describe... We may use a new page to list all of
+          them.
+        </p>
+        <p>See also <a href="/blacklist.html">blacklist</a>.</p>
+      </section>
+      <section>
+        <h2>Contact</h2>
+        <p>You should provide target node, your ASN, WireGuard Endpoint and Public Key, IPv6 Link-Local Address, and other essential information. Wireguard Endpoint may be optional if you are behind NAT but the target node not. I will reply as soon as possible. You can assume my endpoint port is last 5 digits of your ASN. If you want to use other peering method, please tell me.</p>
+        <ul>
+          <li>Email: <code>sess AT sess.dn42</code> || <code>sessionhu AT outlook.com</code></li>
+          <li>Bilibili: <a href="https://space.bilibili.com/645769214">Session小胡</a></li>
+          <li>Matrix: <a href="https://matrix.to/#/@sessx6cf:matrix.org">@sessx6cf:matrix.org</a></li>
+          <li>More at my blog, but not recommended</li>
+        </ul>
       </section>
     </main>
     <footer><p><em>Copyright (c) 2026 SESS.DN42. CC-BY-NC-SA-4.0.</em></p></footer>
