@@ -33,13 +33,13 @@
               <th>Protocol</th>
             </tr>
             <tr>
-              <td><code>ns1.sess.dn42.</code></td>
+              <td><code>ns1.sess.dn42.</code> / <code>ns.sess.neo.</code></td>
               <td><code>172.20.62.161</code> / <code>fd42:23eb:6cf::161</code></td>
               <td>UDP / TCP</td>
             </tr>
             <tr>
               <td><code>ns2.sess.dn42.</code></td>
-              <td><code>172.20.62.162</code> / <code>fd42:23eb:6cf::162</code></td>
+              <td><code>172.20.62.164</code> / <code>fd42:23eb:6cf::164</code></td>
               <td>UDP / TCP</td>
             </tr>
           </table>
@@ -57,11 +57,15 @@
             </tr>
             <tr>
               <td><code>aka.dn42.</code></td>
-              <td><code>ns1.sess.dn42.</code></td>
+              <td><code>ns1.sess.dn42.</code> <code>ns2.sess.dn42.</code></td>
+            </tr>
+            <tr>
+              <td><code>sess.neo.</code></td>
+              <td><code>ns.sess.neo.</code></td>
             </tr>
             <tr>
               <td><code>ntp.dn42.</code></td>
-              <td><code>ns1.sess.dn42.</code></td>
+              <td><code>ns1.sess.dn42.</code> <code>ns2.sess.dn42.</code></td>
             </tr>
             <tr>
               <td><code>pool.ntp.dn42.</code></td>
@@ -99,8 +103,7 @@
           </p>
           <p>
             Additionally, please note that TLS and HTTPS certificates are issued
-            by Let's Encrypt for the subject <code>xhustudio.eu.org</code> and
-            subjectAltName <code>*.xhustudio.eu.org</code>. So do not be
+            by Let's Encrypt for my domain name in iana internet. So do not be
             surprised if you encounter a certificate warning when using TLS or
             HTTPS via dn42.
           </p>
@@ -112,7 +115,7 @@
             </tr>
             <tr>
               <td><code>dns.sess.dn42.</code></td>
-              <td><code>172.20.62.164</code> / <code>fd42:23eb:6cf::164</code></td>
+              <td><code>172.20.62.166</code> / <code>fd42:23eb:6cf::166</code></td>
               <td>UDP / TCP / TLS / HTTPS</td>
             </tr>
           </table>
