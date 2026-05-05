@@ -18,9 +18,9 @@
         <ul>
           <li><code>172.20.62.160</code> Reserved</li>
           <li><code>172.20.62.161</code> Antarctica Gateway</li>
-          <li><code>172.20.62.162</code> NE HomeIDC</li>
+          <li><code>172.20.62.162</code> Hold</li>
           <li><code>172.20.62.163</code> MMP Proto</li>
-          <li><code>172.20.62.164</code> NE E2 Google</li>
+          <li><code>172.20.62.164</code> Chronnection</li>
           <li><code>172.20.62.165</code> I5420</li>
           <li><code>172.20.62.166</code> Mazarino</li>
           <li><code>172.20.62.167 - 172.20.62.190</code> Unassigned</li>
@@ -33,35 +33,29 @@
           <li><code>fd42:23eb:6cf::</code> Reserved</li>
           <li><code>fd42:23eb:6cf::1 - fd42:23eb:6cf::160</code> Unassigned</li>
           <li><code>fd42:23eb:6cf::161</code> Antarctica Gateway</li>
-          <li><code>fd42:23eb:6cf::162</code> NE HomeIDC</li>
+          <li><code>fd42:23eb:6cf::162</code> Hold</li>
           <li><code>fd42:23eb:6cf::163</code> MMP Proto</li>
-          <li><code>fd42:23eb:6cf::164</code> NE E2 Google</li>
+          <li><code>fd42:23eb:6cf::164</code> Chronnection</li>
           <li><code>fd42:23eb:6cf::165</code> I5420</li>
           <li><code>fd42:23eb:6cf::166</code> Mazarino</li>
           <li><code>fd42:23eb:6cf::167 - fd42:23eb:6cf:1110:ffff:ffff:ffff:ffff</code> Unassigned</li>
-          <li><code>fd42:23eb:6cf:1111:: - fd42:23eb:6cf:1111:ffff:ffff:ffff:ffff</code> Sess VM Network</li>
-          <li><code>fd42:23eb:6cf:1112:: - fd42:23eb:6cf:aaa0:ffff:ffff:ffff:ffff</code> Unassigned</li>
+          <li><code>fd42:23eb:6cf:1100:: - fd42:23eb:6cf:11ff:ffff:ffff:ffff:ffff</code> Sess VM Network</li>
+          <li><code>fd42:23eb:6cf:1200:: - fd42:23eb:6cf:aaa9:ffff:ffff:ffff:ffff</code> Unassigned</li>
           <li><code>fd42:23eb:6cf:aaaa:: - fd42:23eb:6cf:aaaa:ffff:ffff:ffff:ffff</code> Sess Anycast Network</li>
           <li><code>fd42:23eb:6cf:aaab:: - fd42:23eb:6cf:ffff:ffff:ffff:ffff:fffe</code> Unassigned</li>
           <li><code>fd42:23eb:6cf:ffff:ffff:ffff:ffff:ffff</code> Reserved</li>
         </ul>
         <section>
-          <h3><code>fd42:23eb:6cf:1111::/64</code> Sess VM Network</h3>
+          <h3><code>fd42:23eb:6cf:1100::/56</code> Sess VM Network</h3>
           <ul>
-            <li><code>fd42:23eb:6cf:1111::</code> Reserved</li>
-            <li><code>fd42:23eb:6cf:1111::1 - fd42:23eb:6cf:1111:162:ffff:ffff:ffff</code> Unassigned</li>
-            <li><code>fd42:23eb:6cf:1111:163:: - fd42:23eb:6cf:1111:163:ffff:ffff:ffff</code> MMP Proto VM Network</li>
-            <li><code>fd42:23eb:6cf:1111:164:: - fd42:23eb:6cf:1111:ffff:ffff:ffff:fffe</code> Unassigned</li>
-            <li><code>fd42:23eb:6cf:1111:ffff:ffff:ffff:ffff</code> Reserved</li>
+            <li><code>fd42:23eb:6cf:1100:: - fd42:23eb:6cf:1100:ffff:ffff:ffff:ffff</code> Reserved</li>
+            <li><code>fd42:23eb:6cf:1101:: - fd42:23eb:6cf:1101:ffff:ffff:ffff:ffff</code> Mazarino VM Network</li>
+            <li><code>fd42:23eb:6cf:1102:: - fd42:23eb:6cf:11ff:ffff:ffff:ffff:ffff</code> Unassigned</li>
           </ul>
           <section>
-            <h4><code>fd42:23eb:6cf:1111:163::/80</code> MMP Proto VM Network</h4>
+            <h4><code>fd42:23eb:6cf:1101::/64</code> Mazarino VM Network</h4>
             <ul>
-              <li><code>fd42:23eb:6cf:1111:163::</code> Reserved</li>
-              <li><code>fd42:23eb:6cf:1111:163::1</code> MMP Proto VM dn42 Bridge</li>
-              <li><code>fd42:23eb:6cf:1111:163::2</code> MMP Proto VM GNU Guix</li>
-              <li><code>fd42:23eb:6cf:1111:163::3 - fd42:23eb:6cf:1111:163:ffff:ffff:fffe</code> Unassigned</li>
-              <li><code>fd42:23eb:6cf:1111:163:ffff:ffff:ffff</code> Reserved</li>
+              <li><code>fd42:23eb:6cf:1101:: - fd42:23eb:6cf:1101:ffff:ffff:ffff:ffff</code> SLAAC</li>
             </ul>
           </section>
         </section>
@@ -79,7 +73,15 @@
       <section>
         <h2><code>10.127.28.0/24</code> Network of Sess</h2>
         <ul>
-          <li><code>10.127.28.0 - 10.127.28.255</code> SessX6cf Home LAN Host</li>
+          <li><code>10.127.28.0</code> Reserved</li>
+          <li><code>10.127.28.1</code> HomeLAN TP-Link Router</li>
+          <li><code>10.127.28.2 - 10.127.28.96</code> Unassigned</li>
+          <li><code>10.127.28.97</code> I5420</li>
+          <li><code>10.127.28.98</code> XMI8</li>
+          <li><code>10.127.28.99</code> Redmi</li>
+          <li><code>10.127.28.100 - 10.127.28.199</code> DHCP</li>
+          <li><code>10.127.28.200 - 10.127.28.254</code> Unassigned</li>
+          <li><code>10.127.28.255</code> Reserved</li>
         </ul>
       </section>
       <section>
