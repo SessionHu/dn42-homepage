@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="canonical" href="https://sess.dn42/routing.html" />
+    <title>SESS.DN42 Routing Policy</title>
+    <link rel="icon" type="image/vnd.microsoft.icon" sizes="32x32" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.u1f365.svg" />
+    <link rel="stylesheet" href="/styles/index.css" />
+  </head>
+  <body>
+    <header><h1><a href="/">SESS.DN42</a> Routing Policy</h1></header>
+    <main>
+      <p>SessNetwork (AS4242422466) uses a custom routing method designed for dn42 internet. We call it <i title="毒土豆路由">Poisoned Potato Routing</i>. Our <code>bgp_local_pref</code> base value is 200 for eBGP, 190 for iBGP.</p>
+      <section>
+        <h2>BGP Communities</h2>
+        <p>We support some well-known and common communities. They are defined in RFCs and <a href="https://wiki.dn42/howto/BGP-communities" rel="noopener" target="_blank">dn42 wiki</a>.</p>
+        <table class="dot-table">
+          <tbody>
+            <tr><td>NO_EXPORT</td><td>(65535, 65281)</td><td>Reject in eBGP export filter</td></tr>
+            <tr><td>NO_ADVERTISE</td><td>(65535, 65282)</td><td>Reject in iBGP and eBGP export filter</td></tr>
+            <tr><td>NO_EXPORT_SUBCONFED</td><td>(65535, 65283)</td><td>Reject in eBGP export filter</td></tr>
+            <tr><td>BLACKHOLE</td><td>(65535, 666)</td><td>Set destination to RTD_BLACKHOLE in iBGP and eBGP import filter</td></tr>
+            <tr><td>(64511, DN42_RTT)</td><td>(64511, 1..9)</td><td>Add in iBGP and eBGP, import and export filter. Will be modified according to your RTT. <code>bgp_local_pref += 9 - DN42_RTT</code></td></tr>
+            <tr><td>(64511, DN42_LINK)</td><td>(64511, 31..34)</td><td>Add in iBGP and eBGP, import and export filter. Will be modified according to your link security. <code>bgp_local_pref += DN42_LINK - 31</code></td></tr>
+            <tr><td>(64511, DN42_REGION)</td><td>(64511, 41..70)</td><td>Add in iBGP and eBGP, export filter, for prefixes originated from AS4242422466. <code>bgp_local_pref += 40</code> in eBGP import filter</td></tr>
+            <tr><td>(64511, DN42_COUNTRY)</td><td>(64511, 1000..1999)</td><td>Add in iBGP and eBGP, export filter, for prefixes originated from AS4242422466. <code>bgp_local_pref += 20</code> in eBGP import filter</td></tr>
+          </tbody>
+        </table>
+      </section>
+      <section>
+        <h2>BGP Large Communities</h2>
+        <p>We support these following BGP Large Communities. They are designed for internal routing and may be helpful for you.</p>
+        <section>
+          <h3>(MY_ASN, BCOMM_EXPORT, *) :: (4242422466, 100, *)</h3>
+          <table class="dot-table">
+            <tbody>
+              <tr><td>BCOMM_EXPORT_ONLY_IBGP</td><td>0</td><td>Add in iBGP export filter, for MY_SPECIFIC_NETS_V{4,6}. Reject in eBGP export filter</td></tr>
+              <tr><td>BCOMM_EXPORT_ONLY_EBGP</td><td>1</td><td>Reject in iBGP export filter</td></tr>
+              <tr><td>BCOMM_EXPORT_IXP</td><td>2</td><td>Add in eBGP import filter, for every downstream and customer. Accept in eBGP export filter, where <code>bgp_path.len &lt; 2</code>, for IX</td></tr>
+              <tr><td>BCOMM_EXPORT_REJECT</td><td>3</td><td>Reject in iBGP and eBGP, export filter</td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section>
+          <h3>(MY_ASN, BCOMM_IN_REGION, *) :: (4242422466, 200, *)</h3>
+          <p>Add in iBGP export filter, for prefixes originated from AS4242422466. Add in eBGP import filter. Regions are defined in <a href="https://wiki.dn42/howto/BGP-communities#region" rel="noopener" target="_blank">dn42 wiki</a>. <code>bgp_local_pref += 20</code> for same region in iBGP import filter</p>
+        </section>
+        <section>
+          <h3>(MY_ASN, BCOMM_OUT_REGION, *) :: (4242422466, 201, *)</h3>
+          <p>Add in eBGP export filter. Regions are defined in <a href="https://wiki.dn42/howto/BGP-communities#region" rel="noopener" target="_blank">dn42 wiki</a></p>
+        </section>
+        <section>
+          <h3>(MY_ASN, BCOMM_IN_COUNTRY, *) :: (4242422466, 202, *)</h3>
+          <p>Add in iBGP export filter, for prefixes originated from AS4242422466. Add in eBGP import filter. Countries are defined in <a href="https://wiki.dn42/howto/BGP-communities#country" rel="noopener" target="_blank">dn42 wiki</a>. <code>bgp_local_pref += 10</code> for same country in iBGP import filter</p>
+        </section>
+        <section>
+          <h3>(MY_ASN, BCOMM_OUT_COUNTRY, *) :: (4242422466, 203, *)</h3>
+          <p>Add in eBGP export filter. Countries are defined in <a href="https://wiki.dn42/howto/BGP-communities#country" rel="noopener" target="_blank">dn42 wiki</a></p>
+        </section>
+        <section>
+          <h3>(MY_ASN, BCOMM_TUNTAP, *) :: (4242422466, 300, *)</h3>
+          <table class="dot-table">
+            <tbody>
+              <tr><td>BCOMM_TUNTAP_WGK</td><td>0</td><td>Add in iBGP and eBGP, import and export filter, for Kernelspace WireGuard tunnel. Related to (64511, 34)</td></tr>
+              <tr><td>BCOMM_TUNTAP_WGU</td><td>1</td><td>Add in iBGP and eBGP, import and export filter, for Userspace WireGuard tunnel. Related to (64511, 34)</td></tr>
+              <tr><td>BCOMM_TUNTAP_AWGK</td><td>2</td><td>Add in iBGP and eBGP, import and export filter, for Kernelspace AmneziaWG tunnel. Related to (64511, 34)</td></tr>
+              <tr><td>BCOMM_TUNTAP_AWGU</td><td>3</td><td>Add in iBGP and eBGP, import and export filter, for Userspace AmneziaWG tunnel. Related to (64511, 34)</td></tr>
+              <tr><td>BCOMM_TUNTAP_GRE</td><td>4</td><td>Add in iBGP and eBGP, import and export filter, for GRE/GRE6 tunnel. Related to (64511, 32)</td></tr>
+              <tr><td>BCOMM_TUNTAP_N2N</td><td>5</td><td>Add in iBGP and eBGP, import and export filter, for n2n/n3n tunnel. Related to (64511, 33)</td></tr>
+              <tr><td>BCOMM_TUNTAP_TINC</td><td>6</td><td>Add in iBGP and eBGP, import and export filter, for Tinc 1.1 tunnel. Related to (64511, 34)</td></tr>
+              <tr><td>BCOMM_TUNTAP_UNDEF</td><td>114514</td><td>Add in iBGP and eBGP, import and export filter, for other. Related to (64511, 31)</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+    </main>
+    <footer><p><em>Copyright (c) 2026 SESS.DN42. CC-BY-NC-SA-4.0.</em></p></footer>
+  </body>
+</html>
