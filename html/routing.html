@@ -22,8 +22,8 @@
             <tr><td>NO_ADVERTISE</td><td>(65535, 65282)</td><td>Reject in iBGP and eBGP export filter</td></tr>
             <tr><td>NO_EXPORT_SUBCONFED</td><td>(65535, 65283)</td><td>Reject in eBGP export filter</td></tr>
             <tr><td>BLACKHOLE</td><td>(65535, 666)</td><td>Set destination to RTD_BLACKHOLE in iBGP and eBGP import filter</td></tr>
-            <tr><td>(64511, DN42_RTT)</td><td>(64511, 1..9)</td><td>Add in iBGP and eBGP, import and export filter. Will be modified according to your RTT. <code>bgp_local_pref += 9 - DN42_RTT</code></td></tr>
-            <tr><td>(64511, DN42_LINK)</td><td>(64511, 31..34)</td><td>Add in iBGP and eBGP, import and export filter. Will be modified according to your link security. <code>bgp_local_pref += DN42_LINK - 31</code></td></tr>
+            <tr><td>(64511, DN42_RTT)</td><td>(64511, 1..9)</td><td>Add in eBGP, import and export filter. Will be modified according to your RTT. <code>bgp_local_pref += 9 - DN42_RTT</code></td></tr>
+            <tr><td>(64511, DN42_LINK)</td><td>(64511, 31..34)</td><td>Add in eBGP, import and export filter. Will be modified according to your link security. <code>bgp_local_pref += DN42_LINK - 31</code></td></tr>
             <tr><td>(64511, DN42_REGION)</td><td>(64511, 41..70)</td><td>Add in iBGP and eBGP, export filter, for prefixes originated from AS4242422466. <code>bgp_local_pref += 40</code> in eBGP import filter</td></tr>
             <tr><td>(64511, DN42_COUNTRY)</td><td>(64511, 1000..1999)</td><td>Add in iBGP and eBGP, export filter, for prefixes originated from AS4242422466. <code>bgp_local_pref += 20</code> in eBGP import filter</td></tr>
           </tbody>
@@ -63,14 +63,14 @@
           <h3>(MY_ASN, BCOMM_TUNTAP, *) :: (4242422466, 300, *)</h3>
           <table class="dot-table">
             <tbody>
-              <tr><td>BCOMM_TUNTAP_WGK</td><td>0</td><td>Add in iBGP and eBGP, import and export filter, for Kernelspace WireGuard tunnel. Related to (64511, 34)</td></tr>
-              <tr><td>BCOMM_TUNTAP_WGU</td><td>1</td><td>Add in iBGP and eBGP, import and export filter, for Userspace WireGuard tunnel. Related to (64511, 34)</td></tr>
-              <tr><td>BCOMM_TUNTAP_AWGK</td><td>2</td><td>Add in iBGP and eBGP, import and export filter, for Kernelspace AmneziaWG tunnel. Related to (64511, 34)</td></tr>
-              <tr><td>BCOMM_TUNTAP_AWGU</td><td>3</td><td>Add in iBGP and eBGP, import and export filter, for Userspace AmneziaWG tunnel. Related to (64511, 34)</td></tr>
-              <tr><td>BCOMM_TUNTAP_GRE</td><td>4</td><td>Add in iBGP and eBGP, import and export filter, for GRE/GRE6 tunnel. Related to (64511, 32)</td></tr>
-              <tr><td>BCOMM_TUNTAP_N2N</td><td>5</td><td>Add in iBGP and eBGP, import and export filter, for n2n/n3n tunnel. Related to (64511, 33)</td></tr>
-              <tr><td>BCOMM_TUNTAP_TINC</td><td>6</td><td>Add in iBGP and eBGP, import and export filter, for Tinc 1.1 tunnel. Related to (64511, 34)</td></tr>
-              <tr><td>BCOMM_TUNTAP_UNDEF</td><td>114514</td><td>Add in iBGP and eBGP, import and export filter, for other. Related to (64511, 31)</td></tr>
+              <tr><td>BCOMM_TUNTAP_WGK</td><td>0</td><td>Add in eBGP, import and export filter, for Kernelspace WireGuard tunnel. Related to (64511, 34)</td></tr>
+              <tr><td>BCOMM_TUNTAP_WGU</td><td>1</td><td>Add in eBGP, import and export filter, for Userspace WireGuard tunnel. Related to (64511, 34)</td></tr>
+              <tr><td>BCOMM_TUNTAP_AWGK</td><td>2</td><td>Add in eBGP, import and export filter, for Kernelspace AmneziaWG tunnel. Related to (64511, 34)</td></tr>
+              <tr><td>BCOMM_TUNTAP_AWGU</td><td>3</td><td>Add in eBGP, import and export filter, for Userspace AmneziaWG tunnel. Related to (64511, 34)</td></tr>
+              <tr><td>BCOMM_TUNTAP_GRE</td><td>4</td><td>Add in eBGP, import and export filter, for GRE/GRE6 tunnel. Related to (64511, 32)</td></tr>
+              <tr><td>BCOMM_TUNTAP_N2N</td><td>5</td><td>Add in eBGP, import and export filter, for n2n/n3n tunnel. Related to (64511, 33)</td></tr>
+              <tr><td>BCOMM_TUNTAP_TINC</td><td>6</td><td>Add in eBGP, import and export filter, for Tinc 1.1 tunnel. Related to (64511, 34)</td></tr>
+              <tr><td>BCOMM_TUNTAP_UNDEF</td><td>114514</td><td>Add in eBGP, import and export filter, for other. Related to (64511, 31)</td></tr>
             </tbody>
           </table>
         </section>
