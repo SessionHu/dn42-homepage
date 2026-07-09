@@ -16,7 +16,7 @@
         All our servers use BIND9 and DNSSEC verification is enabled.
         You may trust our result to some extent (assuming no MITM).
         But I still recommend that you verify the result by yourself.
-        <i>We do not support anycast yet. 'Cause it is unnecessary. (x</i>
+        <i><s>We do not support anycast yet. 'Cause it's unnecessary. (x</s></i>
       </p>
       <section>
         <h2>Authoritative Name Servers</h2>
@@ -99,12 +99,12 @@
         <section>
           <h3>Servers</h3>
           <p>
-            This server is accessible via both clearnet and dn42 from all IPs,
-            and will return results for any dn42 and clearnet domain names that
+            This server is accessible via both iana and dn42 from all IPs,
+            and will return results for any dn42 and iana domain names that
             can be resolved.
           </p>
           <p>
-            You need to contact us to get the clearnet IP address and/or domain
+            You may need to contact us to get the iana IP address and/or domain
             name for security concerns. Please note that our resources are not
             unlimited, and we reserve the right to ban your IP address if the
             service is abused.
@@ -120,11 +120,25 @@
               <th>Name</th>
               <th>IP</th>
               <th>Protocol</th>
+              <th>Note</th>
             </tr>
             <tr>
-              <td><code>dns.sess.dn42.</code></td>
+              <td><code>dns.sess.dn42.</code> / <code>dns.anycast.sess.dn42.</code></td>
+              <td><code>172.20.62.190</code> / <code>fd42:23eb:6cf:aaaa::53</code></td>
+              <td>UDP / TCP / TLS / HTTPS</td>
+              <td>Anycast</li>
+            </tr>
+            <tr>
+              <td><code>dns.mazarino.sess.dn42.</code></td>
               <td><code>172.20.62.166</code> / <code>fd42:23eb:6cf::166</code></td>
               <td>UDP / TCP / TLS / HTTPS</td>
+              <td>Unicast</li>
+            </tr>
+            <tr>
+              <td><code>dns.neonled.sess.dn42.</code></td>
+              <td><code>172.20.62.168</code> / <code>fd42:23eb:6cf::168</code></td>
+              <td>UDP / TCP / TLS / HTTPS</td>
+              <td>Unicast</li>
             </tr>
           </table>
         </section>
