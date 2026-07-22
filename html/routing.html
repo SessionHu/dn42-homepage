@@ -12,7 +12,7 @@
   <body>
     <header><h1><a href="/">SESS.DN42</a> Routing Policy</h1></header>
     <main>
-      <p>SessNetwork (AS4242422466) uses a custom routing method designed for dn42 internet. We call it <i title="毒土豆路由">Poisoned Potato Routing</i>. Our <code>bgp_local_pref</code> base value is 200 for eBGP, 180 for iBGP.</p>
+      <p>SessNetwork (AS4242422466) uses a custom routing method designed for dn42 internet. We call it <i title="毒土豆路由">Poisoned Potato Routing</i>. Our <code>bgp_local_pref</code> base value is 200 for eBGP, 180 for iBGP. The <code>med</code> metric is on and it will be rewrite in eBGP filters, default value is 0.</p>
       <section>
         <h2>BGP Communities</h2>
         <p>We support some well-known and common communities. They are defined in RFCs and <a href="https://wiki.dn42/howto/BGP-communities" rel="noopener" target="_blank">dn42 wiki</a>.</p>
@@ -22,8 +22,8 @@
             <tr><td>NO_ADVERTISE</td><td>(65535, 65282)</td><td>Reject in iBGP and eBGP export filter</td></tr>
             <tr><td>NO_EXPORT_SUBCONFED</td><td>(65535, 65283)</td><td>Reject in eBGP export filter</td></tr>
             <tr><td>BLACKHOLE</td><td>(65535, 666)</td><td>Set destination to RTD_BLACKHOLE in iBGP and eBGP import filter</td></tr>
-            <tr><td>(64511, DN42_RTT)</td><td>(64511, 1..9)</td><td>Add in eBGP, import and export filter. Will be modified according to your RTT. <code>bgp_local_pref += 9 - DN42_RTT</code></td></tr>
-            <tr><td>(64511, DN42_LINK)</td><td>(64511, 31..34)</td><td>Add in eBGP, import and export filter. Will be modified according to your link security. <code>bgp_local_pref += DN42_LINK - 31</code></td></tr>
+            <tr><td>(64511, DN42_RTT)</td><td>(64511, 1..9)</td><td>Add in eBGP, import and export filter. Will be modified according to your RTT. <code>bgp_med += (update_rtt_level(rtt_level) - DN42_RTT_0) * 10</code></td></tr>
+            <tr><td>(64511, DN42_LINK)</td><td>(64511, 31..34)</td><td>Add in eBGP, import and export filter. Will be modified according to your link security. <code>bgp_med += (DN42_LINK_PFS - update_link(bcomm_tuntap_type)) * 30</code></td></tr>
             <tr><td>(64511, DN42_REGION)</td><td>(64511, 41..70)</td><td>Add in iBGP and eBGP, export filter, for prefixes originated from AS4242422466. <code>bgp_local_pref += 40</code> in eBGP import filter</td></tr>
             <tr><td>(64511, DN42_COUNTRY)</td><td>(64511, 1000..1999)</td><td>Add in iBGP and eBGP, export filter, for prefixes originated from AS4242422466. <code>bgp_local_pref += 20</code> in eBGP import filter</td></tr>
           </tbody>
