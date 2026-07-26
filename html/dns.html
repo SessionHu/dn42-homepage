@@ -13,7 +13,7 @@
     <header><h1><a href="/">SESS.DN42</a> DNS Services</h1></header>
     <main>
       <p>
-        All our servers use BIND9 and DNSSEC verification is enabled.
+        All our servers use BIND9 or Unbound and DNSSEC verification is enabled.
         You may trust our result to some extent (assuming no MITM).
         But I still recommend that you verify the result by yourself.
         <i><s>We do not support anycast yet. 'Cause it's unnecessary. (x</s></i>
@@ -110,7 +110,7 @@
             service is abused.
           </p>
           <p>
-            Additionally, please note that TLS and HTTPS certificates are issued
+            Additionally, please note that TLS and HTTPS certificates may issued
             by Let's Encrypt for my domain name in iana internet. So do not be
             surprised if you encounter a certificate warning when using TLS or
             HTTPS via dn42.
@@ -137,6 +137,12 @@
             <tr>
               <td><code>dns.neonled.sess.dn42.</code></td>
               <td><code>172.20.62.168</code> / <code>fd42:23eb:6cf::168</code></td>
+              <td>UDP / TCP / TLS / HTTPS</td>
+              <td>Unicast</li>
+            </tr>
+            <tr>
+              <td><code>dns.touhou.sess.dn42.</code></td>
+              <td><code>172.20.62.169</code> / <code>fd42:23eb:6cf::169</code></td>
               <td>UDP / TCP / TLS / HTTPS</td>
               <td>Unicast</li>
             </tr>
