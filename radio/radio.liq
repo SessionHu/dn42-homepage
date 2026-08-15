@@ -1,4 +1,5 @@
 settings.log.level := 3
+settings.charset.max_string_length := 8192
 
 music_dir = environment.get("MUSIC_DIR")
 
