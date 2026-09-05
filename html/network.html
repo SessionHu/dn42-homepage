@@ -76,9 +76,7 @@
           <li><code>fd42:23eb:6cf::175</code> Octo</li>
           <li><code>fd42:23eb:6cf::176 - fd42:23eb:6cf::185</code> Unassigned</li>
           <li><code>fd42:23eb:6cf::186 - fd42:23eb:6cf::187</code> Point To Point Link</li>
-          <li><code>fd42:23eb:6cf::188 - fd42:23eb:6cf:1110:ffff:ffff:ffff:ffff</code> Unassigned</li>
-          <li><code>fd42:23eb:6cf:1100:: - fd42:23eb:6cf:11ff:ffff:ffff:ffff:ffff</code> Sess VM Network</li>
-          <li><code>fd42:23eb:6cf:1200:: - fd42:23eb:6cf:aaa9:ffff:ffff:ffff:ffff</code> Unassigned</li>
+          <li><code>fd42:23eb:6cf::188 - fd42:23eb:6cf:aaa9:ffff:ffff:ffff:ffff</code> Unassigned</li>
           <li><code>fd42:23eb:6cf:aaaa:: - fd42:23eb:6cf:aaaa:ffff:ffff:ffff:ffff</code> Sess Anycast Network</li>
           <li><code>fd42:23eb:6cf:aaab:: - fd42:23eb:6cf:ffff:ffff:ffff:ffff:fffe</code> Unassigned</li>
           <li><code>fd42:23eb:6cf:ffff:ffff:ffff:ffff:ffff</code> Reserved</li>
@@ -89,42 +87,6 @@
             <li><code>fd42:23eb:6cf::186</code> PtP External Terminal Client</li>
             <li><code>fd42:23eb:6cf::187</code> PtP External Terminal Server</li>
           </ul>
-        </section>
-        <section>
-          <h3><code>fd42:23eb:6cf:1100::/56</code> Sess VM Network</h3>
-          <ul>
-            <li><code>fd42:23eb:6cf:1100:: - fd42:23eb:6cf:1100:ffff:ffff:ffff:ffff</code> Reserved</li>
-            <li><code>fd42:23eb:6cf:1101:: - fd42:23eb:6cf:1101:ffff:ffff:ffff:ffff</code> Hydrogen VM Network</li>
-            <li><code>fd42:23eb:6cf:1102:: - fd42:23eb:6cf:1102:ffff:ffff:ffff:ffff</code> Sess TouHou - LeZi VM Network (aka. Yukisino IX - Lite)</li>
-            <li><code>fd42:23eb:6cf:1103:: - fd42:23eb:6cf:1103:ffff:ffff:ffff:ffff</code> Yukisino IX - DE Frankfurt</li>
-            <li><code>fd42:23eb:6cf:1104:: - fd42:23eb:6cf:1103:ffff:ffff:ffff:ffff</code> TouHou VM Network</li>
-            <li><code>fd42:23eb:6cf:1105:: - fd42:23eb:6cf:11ff:ffff:ffff:ffff:ffff</code> Unassigned</li>
-          </ul>
-          <section>
-            <h4><code>fd42:23eb:6cf:1101::/64</code> Hydrogen VM Network</h4>
-            <ul>
-              <li><code>fd42:23eb:6cf:1101:: - fd42:23eb:6cf:1101:ffff:ffff:ffff:ffff</code> SLAAC</li>
-            </ul>
-          </section>
-          <section>
-            <h4><code>fd42:23eb:6cf:1102::/64</code> Sess TouHou - LeZi VM Network (aka. Yukisino IX - Lite)</h4>
-            <ul>
-              <li><code>fd42:23eb:6cf:1102:: - fd42:23eb:6cf:1102:ffff:ffff:ffff:ffff</code> SLAAC</li>
-            </ul>
-          </section>
-          <section>
-            <h4><code>fd42:23eb:6cf:1103::/64</code> Yukisino IX - DE Frankfurt</h4>
-            <ul>
-              <li><code>fd42:23eb:6cf:1103::1</code> Yukisino IX - DE Frankfurt Host</li>
-              <li><code>fd42:23eb:6cf:1103:: - fd42:23eb:6cf:1103:ffff:ffff:ffff:ffff</code> SLAAC</li>
-            </ul>
-          </section>
-          <section>
-            <h4><code>fd42:23eb:6cf:1104::/64</code> Touhou VM Network</h4>
-            <ul>
-              <li><code>fd42:23eb:6cf:1104:: - fd42:23eb:6cf:1104:ffff:ffff:ffff:ffff</code> SLAAC</li>
-            </ul>
-          </section>
         </section>
         <section>
           <h3><code>fd42:23eb:6cf:aaaa::/64</code> Sess Anycast Network</h3>
@@ -167,8 +129,40 @@
       <section>
         <h2><code>fd10:127:2466::/48</code> Network of Sess</h2>
         <ul>
-          <li><code>fd10:127:2466:: - fd10:127:2466:ffff:ffff:ffff:ffff:ffff</code> Unassigned</li>
+          <li><code>fd10:127:2466:: - fd10:127:2466:0:ffff:ffff:ffff:ffff</code> Reserved</li>
+          <li><code>fd10:127:2466:1:: - fd10:127:2466:1:ffff:ffff:ffff:ffff</code> Hydrogen VM Network</li>
+          <li><code>fd10:127:2466:2:: - fd10:127:2466:2:ffff:ffff:ffff:ffff</code> Sess TouHou - LeZi VM Network (aka. Yukisino IX - Lite)</li>
+          <li><code>fd10:127:2466:3:: - fd10:127:2466:3:ffff:ffff:ffff:ffff</code> Yukisino IX - DE Frankfurt</li>
+          <li><code>fd10:127:2466:4:: - fd10:127:2466:4:ffff:ffff:ffff:ffff</code> TouHou VM Network</li>
+          <li><code>fd10:127:2466:5:: - fd10:127:2466:5:ffff:ffff:ffff:ffff</code> NEON LED VM Network</li>
+          <li><code>fd10:127:2466:6:: - fd10:127:2466:ffff:ffff:ffff:ffff:ffff</code> Unassigned</li>
         </ul>
+        <section>
+          <h4><code>fd10:127:2466:1::/64</code> Hydrogen VM Network</h4>
+          <ul>
+            <li><code>fd10:127:2466:1:: - fd10:127:2466:1:ffff:ffff:ffff:ffff</code> SLAAC</li>
+          </ul>
+        </section>
+        <section>
+          <h4><code>fd10:127:2466:2::/64</code> Sess TouHou - LeZi VM Network (aka. Yukisino IX - Lite)</h4>
+          <ul>
+            <li><code>fd10:127:2466:2::1</code> Yukisino IX - Lite Host</li>
+            <li><code>fd10:127:2466:2:: - fd10:127:2466:2:ffff:ffff:ffff:ffff</code> SLAAC</li>
+          </ul>
+        </section>
+        <section>
+          <h4><code>fd10:127:2466:3::/64</code> Yukisino IX - DE Frankfurt</h4>
+          <ul>
+            <li><code>fd10:127:2466:3::1</code> Yukisino IX - DE Frankfurt Host</li>
+            <li><code>fd10:127:2466:3:: - fd10:127:2466:3:ffff:ffff:ffff:ffff</code> SLAAC</li>
+          </ul>
+        </section>
+        <section>
+          <h4><code>fd10:127:2466:4::/64</code> Touhou VM Network</h4>
+          <ul>
+            <li><code>fd10:127:2466:4:: - fd10:127:2466:4:ffff:ffff:ffff:ffff</code> SLAAC</li>
+          </ul>
+        </section>
       </section>
     </main>
     <footer><p><em>Copyright (c) 2026 SESS.DN42. CC-BY-NC-SA-4.0.</em></p></footer>
