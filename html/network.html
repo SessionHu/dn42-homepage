@@ -22,7 +22,7 @@
           <li><code>172.20.62.163</code> MMP Proto</li>
           <li><code>172.20.62.164</code> Chronnection</li>
           <li><code>172.20.62.165</code> I5420</li>
-          <li><code>172.20.62.166</code> <i>Hold</i></li>
+          <li><code>172.20.62.166</code> Flint</li>
           <li><code>172.20.62.167</code> Leaflet</li>
           <li><code>172.20.62.168</code> NEON LED</li>
           <li><code>172.20.62.169</code> TouHou</li>
@@ -32,17 +32,10 @@
           <li><code>172.20.62.173</code> Overcast</li>
           <li><code>172.20.62.174</code> Grass Block</li>
           <li><code>172.20.62.175</code> Octo</li>
-          <li><code>172.20.62.176 - 172.20.62.185</code> Unassigned</li>
-          <li><code>172.20.62.186 - 172.20.62.187</code> Point To Point Link</li>
+          <li><code>172.20.62.176 - 172.20.62.186</code> Unassigned</li>
+          <li><code>172.20.62.187</code> Network Access for External Terminal</li>
           <li><code>172.20.62.188 - 172.20.62.191</code> Sess Public Services</li>
         </ul>
-        <section>
-          <h3><code>172.20.62.186/31</code> Point To Point Link</h3>
-          <ul>
-            <li><code>172.20.62.186</code> PtP External Terminal Client</li>
-            <li><code>172.20.62.187</code> PtP External Terminal Server</li>
-          </ul>
-        </section>
         <section>
           <h3><code>172.20.62.188/30</code> Sess Public Services</h3>
           <ul>
@@ -74,20 +67,14 @@
           <li><code>fd42:23eb:6cf::173</code> Overcast</li>
           <li><code>fd42:23eb:6cf::174</code> Grass Block</li>
           <li><code>fd42:23eb:6cf::175</code> Octo</li>
-          <li><code>fd42:23eb:6cf::176 - fd42:23eb:6cf::185</code> Unassigned</li>
-          <li><code>fd42:23eb:6cf::186 - fd42:23eb:6cf::187</code> Point To Point Link</li>
+          <li><code>fd42:23eb:6cf::176 - fd42:23eb:6cf::186</code> Unassigned</li>
+          <li><code>fd42:23eb:6cf::187</code> Network Access for External Terminal</li>
           <li><code>fd42:23eb:6cf::188 - fd42:23eb:6cf:aaa9:ffff:ffff:ffff:ffff</code> Unassigned</li>
           <li><code>fd42:23eb:6cf:aaaa:: - fd42:23eb:6cf:aaaa:ffff:ffff:ffff:ffff</code> Sess Anycast Network</li>
-          <li><code>fd42:23eb:6cf:aaab:: - fd42:23eb:6cf:ffff:ffff:ffff:ffff:fffe</code> Unassigned</li>
+          <li><code>fd42:23eb:6cf:aaab:: - fd42:23eb:6cf:aaab:ffff:ffff:ffff:fffe</code> O Fortuna</li>
+          <li><code>fd42:23eb:6cf:aaac:: - fd42:23eb:6cf:ffff:ffff:ffff:ffff:fffe</code> Unassigned</li>
           <li><code>fd42:23eb:6cf:ffff:ffff:ffff:ffff:ffff</code> Reserved</li>
         </ul>
-        <section>
-          <h3><code>fd42:23eb:6cf::186/127</code> Point To Point Link</h3>
-          <ul>
-            <li><code>fd42:23eb:6cf::186</code> PtP External Terminal Client</li>
-            <li><code>fd42:23eb:6cf::187</code> PtP External Terminal Server</li>
-          </ul>
-        </section>
         <section>
           <h3><code>fd42:23eb:6cf:aaaa::/64</code> Sess Anycast Network</h3>
           <ul>
@@ -110,6 +97,12 @@
               <li><code>fd42:23eb:6cf:aaaa::80:ffff</code> Reserved</li>
             </ul>
           </section>
+        </section>
+        <section>
+          <h3><code>fd42:23eb:6cf:aaab::/64</code> O Fortuna</h3>
+          <ul>
+            <li><code>fd42:23eb:6cf:aaab:: - fd42:23eb:6cf:aaab:ffff:ffff:ffff:fffe</code> Route Chain (try traceroute)</li>
+          </ul>
         </section>
       </section>
       <section>
