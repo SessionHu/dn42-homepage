@@ -11,72 +11,214 @@
   </head>
   <body>
     <header><h1><a href="/">SESS.DN42</a> Routing Policy</h1></header>
-    <main><details>
-      <summary>The network is under maintenance. Routing may degrade. Expand to see legacy routing policy.</summary>
-      <p>SessNetwork (AS4242422466) uses a custom routing method designed for dn42 internet. We call it <i title="毒土豆路由">Poisoned Potato Routing</i>. Our <code>bgp_local_pref</code> base value is 200 for eBGP, 180 for iBGP. The <code>med</code> metric is on and it will be rewrite in eBGP filters, default value is 0 for eBGP, 100 for iBGP.</p>
+    <main>
+      <p>SessNetwork (AS4242422466) uses a custom routing method designed for the dn42 internet. We call it <i title="毒土豆路由">Poisoned Potato Routing</i>.</p>
       <section>
-        <h2>BGP Communities</h2>
-        <p>We support some well-known and common communities. They are defined in RFCs and <a href="https://wiki.dn42/howto/BGP-communities" rel="noopener" target="_blank">dn42 wiki</a>.</p>
+        <h2>Routing Preference</h2>
+        <p>We use <code>bgp_local_pref</code> to determine the preferred route and <code>bgp_med</code> to describe link quality.</p>
+        <h3>eBGP Import</h3>
+        <p>The base <code>bgp_local_pref</code> is 200. The following adjustments are applied:</p>
         <table class="dot-table">
           <tbody>
-            <tr><td>NO_EXPORT</td><td>(65535, 65281)</td><td>Reject in eBGP export filter</td></tr>
-            <tr><td>NO_ADVERTISE</td><td>(65535, 65282)</td><td>Reject in iBGP and eBGP export filter</td></tr>
-            <tr><td>NO_EXPORT_SUBCONFED</td><td>(65535, 65283)</td><td>Reject in eBGP export filter</td></tr>
-            <tr><td>BLACKHOLE</td><td>(65535, 666)</td><td>Set destination to RTD_BLACKHOLE in iBGP and eBGP import filter</td></tr>
-            <tr><td>(64511, DN42_RTT)</td><td>(64511, 1..9)</td><td>Add in eBGP, import and export filter. Will be modified according to your RTT. <code>bgp_med += (update_rtt_level(rtt_level) - DN42_RTT_0) * 10</code></td></tr>
-            <tr><td>(64511, DN42_LINK)</td><td>(64511, 31..34)</td><td>Add in eBGP, import and export filter. Will be modified according to your link security. <code>bgp_med += (DN42_LINK_PFS - update_link(bcomm_tuntap_type)) * 30</code></td></tr>
-            <tr><td>(64511, DN42_REGION)</td><td>(64511, 41..70)</td><td>Add in iBGP and eBGP, export filter, for prefixes originated from AS4242422466. <code>bgp_local_pref += 40</code> in eBGP import filter</td></tr>
-            <tr><td>(64511, DN42_COUNTRY)</td><td>(64511, 1000..1999)</td><td>Add in iBGP and eBGP, export filter, for prefixes originated from AS4242422466. <code>bgp_local_pref += 20</code> in eBGP import filter</td></tr>
+            <tr><td>AS-PATH length &lt; 2</td><td>+100</td></tr>
+            <tr><td>AS-PATH length &lt; 3</td><td>+40</td></tr>
+            <tr><td>AS-PATH length &lt; 4</td><td>+20</td></tr>
+            <tr><td>ROA status is unknown</td><td>-90</td></tr>
+            <tr><td>Same region</td><td>+60</td></tr>
+            <tr><td>Same country</td><td>+40</td></tr>
           </tbody>
         </table>
+        <p>Routes with an invalid ROA status are rejected.</p>
+        <h3>iBGP Import</h3>
+        <p>The base <code>bgp_local_pref</code> is 180, with the following adjustments:</p>
+        <table class="dot-table">
+          <tbody>
+            <tr><td>AS-PATH length &lt; 2</td><td>+100</td></tr>
+            <tr><td>AS-PATH length &lt; 3</td><td>+40</td></tr>
+            <tr><td>AS-PATH length &lt; 4</td><td>+20</td></tr>
+            <tr><td>ROA status is unknown</td><td>-90</td></tr>
+            <tr><td>Same region</td><td>+40</td></tr>
+            <tr><td>Same country</td><td>+20</td></tr>
+          </tbody>
+        </table>
+        <p>The iBGP import filter sets the base <code>bgp_med</code> to 500.</p>
+        <h3>MED Calculation</h3>
+        <p>For DN42 eBGP routes, MED is recalculated using link characteristics. The calculation is:</p>
+        <p><code>bgp_med = (latency - DN42_LATENCY_0) * 20 + (DN42_BANDWIDTH_10T - bandwidth) * 10 + (DN42_ENCRYPT_SAFE_PFS_PQC_PFS - encryption) * 30 + (topology - DN42_TOPOLOGY_PHYS) * 30 + (packetloss - DN42_PKTLOSS_0) * 80;</code></p>
+        <p>Lower MED values are preferred. Better latency, bandwidth, encryption, topology, and packet loss characteristics result in a lower metric.</p>
+        <p>The link characteristics are represented by dn42 standard communities. The filter normalizes each characteristic to a single community before calculating MED.</p>
+      </section>
+      <section>
+        <h2>BGP Communities</h2>
+        <p>We support well-known communities and common dn42 communities.</p>
+        <h3>Well-known Communities</h3>
+        <table class="dot-table">
+          <tbody>
+            <tr><td>NO_EXPORT</td><td>(65535, 65281)</td><td>Rejected by eBGP export filter.</td></tr>
+            <tr><td>NO_ADVERTISE</td><td>(65535, 65282)</td><td>Rejected by iBGP and eBGP export filters.</td></tr>
+            <tr><td>NO_EXPORT_SUBCONFED</td><td>(65535, 65283)</td><td>Rejected by eBGP export filter.</td></tr>
+            <tr><td>BLACKHOLE</td><td>(65535, 666)</td><td>Sets the route destination to <code>RTD_BLACKHOLE</code> on import.</td></tr>
+          </tbody>
+        </table>
+        <h3>dn42 Peering link characteristics and Route Origin</h3>
+        <p>See <a href="https://wiki.dn42/howto/BGP-communities/#bgp-communities-in-use-in-dn42">dn42 Wiki</a></p>
       </section>
       <section>
         <h2>BGP Large Communities</h2>
-        <p>We support these following BGP Large Communities. They are designed for internal routing and may be helpful for you.</p>
-        <section>
-          <h3>(MY_ASN, BCOMM_EXPORT, *) :: (4242422466, 100, *)</h3>
-          <table class="dot-table">
-            <tbody>
-              <tr><td>BCOMM_EXPORT_ONLY_IBGP</td><td>0</td><td>Add in iBGP export filter, for MY_SPECIFIC_NETS_V{4,6}. Reject in eBGP export filter</td></tr>
-              <tr><td>BCOMM_EXPORT_ONLY_EBGP</td><td>1</td><td>Reject in iBGP export filter</td></tr>
-              <tr><td>BCOMM_EXPORT_IXP</td><td>2</td><td>Add in eBGP import filter, for every downstream and customer. Accept in eBGP export filter, where <code>bgp_path.len &lt; 2</code>, for IX</td></tr>
-              <tr><td>BCOMM_EXPORT_REJECT</td><td>3</td><td>Reject in iBGP and eBGP, export filter</td></tr>
-            </tbody>
-          </table>
-        </section>
-        <section>
-          <h3>(MY_ASN, BCOMM_IN_REGION, *) :: (4242422466, 200, *)</h3>
-          <p>Add in iBGP export filter, for prefixes originated from AS4242422466. Add in eBGP import filter. Regions are defined in <a href="https://wiki.dn42/howto/BGP-communities#region" rel="noopener" target="_blank">dn42 wiki</a>. <code>bgp_local_pref += 20</code> for same region in iBGP import filter</p>
-        </section>
-        <section>
-          <h3>(MY_ASN, BCOMM_OUT_REGION, *) :: (4242422466, 201, *)</h3>
-          <p>Add in eBGP export filter. Regions are defined in <a href="https://wiki.dn42/howto/BGP-communities#region" rel="noopener" target="_blank">dn42 wiki</a></p>
-        </section>
-        <section>
-          <h3>(MY_ASN, BCOMM_IN_COUNTRY, *) :: (4242422466, 202, *)</h3>
-          <p>Add in iBGP export filter, for prefixes originated from AS4242422466. Add in eBGP import filter. Countries are defined in <a href="https://wiki.dn42/howto/BGP-communities#country" rel="noopener" target="_blank">dn42 wiki</a>. <code>bgp_local_pref += 10</code> for same country in iBGP import filter</p>
-        </section>
-        <section>
-          <h3>(MY_ASN, BCOMM_OUT_COUNTRY, *) :: (4242422466, 203, *)</h3>
-          <p>Add in eBGP export filter. Countries are defined in <a href="https://wiki.dn42/howto/BGP-communities#country" rel="noopener" target="_blank">dn42 wiki</a></p>
-        </section>
-        <section>
-          <h3>(MY_ASN, BCOMM_TUNTAP, *) :: (4242422466, 300, *)</h3>
-          <table class="dot-table">
-            <tbody>
-              <tr><td>BCOMM_TUNTAP_WGK</td><td>0</td><td>Add in eBGP, import and export filter, for Kernelspace WireGuard tunnel. Related to (64511, 34)</td></tr>
-              <tr><td>BCOMM_TUNTAP_WGU</td><td>1</td><td>Add in eBGP, import and export filter, for Userspace WireGuard tunnel. Related to (64511, 34)</td></tr>
-              <tr><td>BCOMM_TUNTAP_AWGK</td><td>2</td><td>Add in eBGP, import and export filter, for Kernelspace AmneziaWG tunnel. Related to (64511, 34)</td></tr>
-              <tr><td>BCOMM_TUNTAP_AWGU</td><td>3</td><td>Add in eBGP, import and export filter, for Userspace AmneziaWG tunnel. Related to (64511, 34)</td></tr>
-              <tr><td>BCOMM_TUNTAP_GRE</td><td>4</td><td>Add in eBGP, import and export filter, for GRE/GRE6 tunnel. Related to (64511, 32)</td></tr>
-              <tr><td>BCOMM_TUNTAP_N2N</td><td>5</td><td>Add in eBGP, import and export filter, for n2n/n3n tunnel. Related to (64511, 33)</td></tr>
-              <tr><td>BCOMM_TUNTAP_TINC</td><td>6</td><td>Add in eBGP, import and export filter, for Tinc 1.1 tunnel. Related to (64511, 34)</td></tr>
-              <tr><td>BCOMM_TUNTAP_UNDEF</td><td>114514</td><td>Add in eBGP, import and export filter, for other. Related to (64511, 31)</td></tr>
-            </tbody>
-          </table>
-        </section>
+        <p>SessNetwork uses BGP Large Communities in the format <code>(MY_ASN, FUNCTION, VALUE)</code>, where <code>MY_ASN</code> is 4242422466.</p>
+        <h3>Neighbor Roles</h3>
+        <p>Neighbor roles are used to apply import limits and export policies.</p>
+        <table class="dot-table">
+          <tbody>
+            <tr><td>SESS_ROLE_PEER</td><td>100</td><td>Peer</td></tr>
+            <tr><td>SESS_ROLE_IX</td><td>200</td><td>Internet Exchange</td></tr>
+            <tr><td>SESS_ROLE_PROVIDER</td><td>300</td><td>Provider</td></tr>
+            <tr><td>SESS_ROLE_CUSTOMER</td><td>400</td><td>Customer</td></tr>
+            <tr><td>SESS_ROLE_PARTNER</td><td>500</td><td>Partner</td></tr>
+          </tbody>
+        </table>
+        <h3>Learned Route Metadata</h3>
+        <p>These communities are attached to routes when they are imported from an eBGP neighbor. Existing values in the same function namespace are replaced.</p>
+        <table class="dot-table">
+          <tbody>
+            <tr><td>(MY_ASN, SESS_LEARN_NEIGH, *)</td><td>1000</td><td>Neighbor ASN from which the route was learned.</td></tr>
+            <tr><td>(MY_ASN, SESS_LEARN_REGION, *)</td><td>1001</td><td>Region of the neighboring network.</td></tr>
+            <tr><td>(MY_ASN, SESS_LEARN_COUNTRY, *)</td><td>1002</td><td>Country of the neighboring network.</td></tr>
+            <tr><td>(MY_ASN, SESS_LEARN_ROLE, *)</td><td>1010</td><td>Role of the neighboring network.</td></tr>
+          </tbody>
+        </table>
+        <h3>ROA Status</h3>
+        <table class="dot-table">
+          <tbody>
+            <tr><td>(MY_ASN, SESS_ROASTAT, SESS_ROASTAT_VALID)</td><td>1100, 0</td><td>ROA valid.</td></tr>
+            <tr><td>(MY_ASN, SESS_ROASTAT, SESS_ROASTAT_UNKNOWN)</td><td>1100, 1</td><td>ROA unknown.</td></tr>
+          </tbody>
+        </table>
+        <p>Invalid ROA routes are rejected. Routes marked as unknown receive a <code>bgp_local_pref</code> penalty.</p>
+        <h3>Route Origin</h3>
+        <table class="dot-table">
+          <tbody>
+            <tr><td>SESS_ORIG_OWN</td><td>0</td><td>Originated by SessNetwork.</td></tr>
+            <tr><td>SESS_ORIG_VIA</td><td>1</td><td>Learned through another network.</td></tr>
+          </tbody>
+        </table>
+        <p>These values are defined for origin metadata. They are not currently assigned by the filters shown here.</p>
+        <h3>Export Control</h3>
+        <p>Export control communities determine whether routes should be advertised to particular neighbor roles, regions, countries, or neighbors. A matching FORCEEXPORT community takes precedence over a matching NOEXPORT community.</p>
+        <table class="dot-table">
+          <tbody>
+            <tr><td>SESS_NOEXPORT_ROLE</td><td>2000</td><td>Do not export to a specified neighbor role.</td></tr>
+            <tr><td>SESS_NOEXPORT_REGION</td><td>2001</td><td>Do not export to a specified region.</td></tr>
+            <tr><td>SESS_NOEXPORT_COUNTRY</td><td>2002</td><td>Do not export to a specified country.</td></tr>
+            <tr><td>SESS_NOEXPORT_NEIGH</td><td>2003</td><td>Do not export to a specified neighbor ASN.</td></tr>
+            <tr><td>SESS_FORCEEXPORT</td><td>2100</td><td>Force export to a specified neighbor role.</td></tr>
+            <tr><td>SESS_FORCEEXPORT_REGION</td><td>2101</td><td>Force export to a specified region.</td></tr>
+            <tr><td>SESS_FORCEEXPORT_COUNTRY</td><td>2102</td><td>Force export to a specified country.</td></tr>
+            <tr><td>SESS_FORCEEXPORT_NEIGH</td><td>2103</td><td>Force export to a specified neighbor ASN.</td></tr>
+          </tbody>
+        </table>
+        <h3>AS-PATH Prepending</h3>
+        <p>These communities request additional occurrences of AS4242422466 to be prepended to the AS-PATH during export. They support matching by neighbor role, region, country, or neighbor ASN.</p>
+        <table class="dot-table">
+          <tbody>
+            <tr><td>SESS_PREPEND1_ROLE</td><td>2010</td><td>Prepend once by neighbor role.</td></tr>
+            <tr><td>SESS_PREPEND1_REGION</td><td>2011</td><td>Prepend once by region.</td></tr>
+            <tr><td>SESS_PREPEND1_COUNTRY</td><td>2012</td><td>Prepend once by country.</td></tr>
+            <tr><td>SESS_PREPEND1_NEIGH</td><td>2013</td><td>Prepend once by neighbor ASN.</td></tr>
+            <tr><td>SESS_PREPEND2_ROLE</td><td>2020</td><td>Prepend twice by neighbor role.</td></tr>
+            <tr><td>SESS_PREPEND2_REGION</td><td>2021</td><td>Prepend twice by region.</td></tr>
+            <tr><td>SESS_PREPEND2_COUNTRY</td><td>2022</td><td>Prepend twice by country.</td></tr>
+            <tr><td>SESS_PREPEND2_NEIGH</td><td>2023</td><td>Prepend twice by neighbor ASN.</td></tr>
+            <tr><td>SESS_PREPEND3_ROLE</td><td>2030</td><td>Prepend three times by neighbor role.</td></tr>
+            <tr><td>SESS_PREPEND3_REGION</td><td>2031</td><td>Prepend three times by region.</td></tr>
+            <tr><td>SESS_PREPEND3_COUNTRY</td><td>2032</td><td>Prepend three times by country.</td></tr>
+            <tr><td>SESS_PREPEND3_NEIGH</td><td>2033</td><td>Prepend three times by neighbor ASN.</td></tr>
+            <tr><td>SESS_PREPEND4_ROLE</td><td>2040</td><td>Prepend four times by neighbor role.</td></tr>
+            <tr><td>SESS_PREPEND4_REGION</td><td>2041</td><td>Prepend four times by region.</td></tr>
+            <tr><td>SESS_PREPEND4_COUNTRY</td><td>2042</td><td>Prepend four times by country.</td></tr>
+            <tr><td>SESS_PREPEND4_NEIGH</td><td>2043</td><td>Prepend four times by neighbor ASN.</td></tr>
+          </tbody>
+        </table>
+        <h3>Export Role Values</h3>
+        <table class="dot-table">
+          <tbody>
+            <tr><td>SESS_EXPORTROLE_ALL</td><td>0</td><td>Match all export roles.</td></tr>
+            <tr><td>SESS_EXPORTROLE_EBGP</td><td>1</td><td>Match eBGP export.</td></tr>
+          </tbody>
+        </table>
+        <h3>Internet Type</h3>
+        <table class="dot-table">
+          <tbody>
+            <tr><td>SESS_INET_DN42</td><td>0</td><td>dn42 address space.</td></tr>
+            <tr><td>SESS_INET_IANA</td><td>1</td><td>iana address space.</td></tr>
+          </tbody>
+        </table>
+        <p><code>(MY_ASN, SESS_INET, *)</code> identifies the address space associated with a route. The current dn42 import filter marks imported routes with <code>SESS_INET_DN42</code>.</p>
       </section>
-    </details></main>
-    <footer><p><em>Copyright (c) 2026 SESS.DN42. CC-BY-NC-SA-4.0.</em></p></footer>
+      <section>
+        <h2>Import Policy</h2>
+        <h3>Prefix Validation</h3>
+        <p>dn42 imports are restricted to the following prefix ranges:</p>
+        <table class="dot-table">
+          <tbody>
+            <tr><td>IPv4</td><td>172.20.0.0/14</td><td>dn42</td></tr>
+            <tr><td>IPv4</td><td>172.20.0.0/24, 172.21.0.0/24, 172.22.0.0/24, 172.23.0.0/24</td><td>dn42 Anycast</td></tr>
+            <tr><td>IPv4</td><td>172.31.0.0/16+</td><td>ChaosVPN</td></tr>
+            <tr><td>IPv4</td><td>10.100.0.0/14+</td><td>ChaosVPN</td></tr>
+            <tr><td>IPv4</td><td>10.127.0.0/16+</td><td>neonetwork</td></tr>
+            <tr><td>IPv4</td><td>10.0.0.0/8{15,24}</td><td>Freifunk.net</td></tr>
+            <tr><td>IPv6</td><td>fd00::/8{44,64}</td><td>dn42</td></tr>
+          </tbody>
+        </table>
+        <p>Prefixes outside these ranges, prefixes in the configured rejection sets, and unsupported address families are rejected.</p>
+        <h3>AS-PATH Limits</h3>
+        <table class="dot-table">
+          <tbody>
+            <tr><td>Peer</td><td>Maximum 3 AS-PATH entries</td></tr>
+            <tr><td>Customer</td><td>Maximum 4 AS-PATH entries</td></tr>
+            <tr><td>Other roles</td><td>Maximum 32 AS-PATH entries</td></tr>
+          </tbody>
+        </table>
+        <p>The general maximum AS-PATH length is 32. The peer and customer limits are stricter.</p>
+      </section>
+      <section>
+        <h2>Export Policy</h2>
+        <h3>eBGP Export</h3>
+        <p>The dn42 eBGP export filter applies the following rules:</p>
+        <ul>
+          <li>Reject routes carrying <code>NO_EXPORT</code>, <code>NO_EXPORT_SUBCONFED</code>, or <code>NO_ADVERTISE</code>.</li>
+          <li>Reject routes outside the configured dn42 prefix ranges.</li>
+          <li>Reject routes with an invalid ROA status according to the export ROA table.</li>
+          <li>Apply AS-PATH prepending and export-control communities.</li>
+          <li>Apply neighbor-role propagation restrictions.</li>
+          <li>Only export BGP routes and explicitly handled static aggregate routes.</li>
+        </ul>
+        <h3>Route Propagation by Neighbor Role</h3>
+        <p>Routes learned from different neighbor roles have different export permissions:</p>
+        <table class="dot-table">
+          <tbody>
+            <tr><td>Peer</td><td>Customer routes only</td></tr>
+            <tr><td>IX</td><td>Customer routes only</td></tr>
+            <tr><td>Provider</td><td>Customer and partner routes</td></tr>
+            <tr><td>Customer</td><td>Customer, partner, peer, and IX routes</td></tr>
+            <tr><td>Partner</td><td>AS-PATH length limited to 32</td></tr>
+          </tbody>
+        </table>
+        <p>These restrictions are based on the <code>SESS_LEARN_ROLE</code> metadata attached during import.</p>
+        <h3>iBGP Export</h3>
+        <p>The iBGP export filter:</p>
+        <ul>
+          <li>Rejects routes carrying <code>NO_ADVERTISE</code>.</li>
+          <li>Rejects routes with an invalid export ROA status.</li>
+          <li>Rejects a route if its BGP next hop matches the target neighbor address.</li>
+          <li>Supports AS-PATH prepending and export-control communities by role, region, country, and neighbor.</li>
+          <li>Exports static routes and BGP routes.</li>
+        </ul>
+        <p>Static routes receive the local dn42 region and country communities before being exported.</p>
+      </section>
+    </main>
+    <footer>
+      <p><em>Copyright (c) 2026 SESS.DN42. CC-BY-NC-SA-4.0.</em></p>
+    </footer>
   </body>
 </html>
